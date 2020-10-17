@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <BeerCard
-      v-for="beer in beers"
+      v-for="beer in beers_list"
       :id="beer.id"
       :key="beer.id"
       :name="beer.name"
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import BeerCard from "./components/BeerCard.vue";
 
@@ -30,41 +30,22 @@ export default {
 
   data() {
     return {
-      beers: [],
-      current_page: 1,
       loading: false,
     };
   },
 
   computed: {
     ...mapState({
-      msg: (state) => state.msg,
+      beers_list: (state) => state.beers_list,
     }),
   },
 
   async beforeMount() {
-    const response = await fetch(
-      `https://api.punkapi.com/v2/beers?page=${this.current_page}&limit=25`
-    );
-    const beers = await response.json();
-    this.beers = beers;
-    this.current_page++;
+    this.load_next();
   },
 
   methods: {
-    async load_next() {
-      this.loading = true;
-      const response = await fetch(
-        `https://api.punkapi.com/v2/beers?page=${this.current_page}&limit=25`
-      );
-      const beers = await response.json();
-      this.beers.push(...beers);
-      // await new Promise((resolve) => {
-      //   setTimeout(resolve, 2000);
-      // });
-      this.loading = false;
-      this.current_page++;
-    },
+    ...mapActions(["load_next", "delete_item"]),
   },
 };
 </script>

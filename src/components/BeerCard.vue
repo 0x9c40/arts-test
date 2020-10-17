@@ -15,12 +15,14 @@
     </div>
     <div class="beer-card__interface beer-interface">
       <div class="beer-interface__edit">Edit</div>
-      <div class="beer-interface__delete">Delete</div>
+      <div class="beer-interface__delete" @click="delete_item(id)">Delete</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "BeerCard",
 
@@ -45,6 +47,10 @@ export default {
       type: String,
       default: "",
     },
+  },
+
+  methods: {
+    ...mapActions(["delete_item"]),
   },
 };
 </script>

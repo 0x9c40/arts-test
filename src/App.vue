@@ -5,13 +5,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "App",
 
   data() {
-    return {
-      msg: "starter",
-    };
+    return {};
+  },
+
+  computed: {
+    ...mapState({
+      msg: (state) => state.msg,
+    }),
   },
 };
 </script>

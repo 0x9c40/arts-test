@@ -6,7 +6,7 @@ module.exports = (env, { mode }) => {
   return {
     mode,
     output: {
-      publicPath: "/default-page/",
+      publicPath: "/arts-test/",
     },
     devServer: {
       contentBase: "./dist",

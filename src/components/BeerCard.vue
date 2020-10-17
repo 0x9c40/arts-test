@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="beer-card__interface beer-interface">
-      <div class="beer-interface__edit">Edit</div>
+      <div class="beer-interface__edit" @click="edit_item(id)">Edit</div>
       <div class="beer-interface__delete" @click="delete_item(id)">Delete</div>
     </div>
   </div>
@@ -50,7 +50,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["delete_item"]),
+    ...mapActions(["edit_item", "delete_item"]),
   },
 };
 </script>

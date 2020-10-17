@@ -13,6 +13,7 @@
       <div v-if="loading">Loading...</div>
       <div v-else>Show next</div>
     </button>
+    <ItemInfoEditor />
   </div>
 </template>
 
@@ -20,12 +21,14 @@
 import { mapActions, mapState } from "vuex";
 
 import BeerCard from "./components/BeerCard.vue";
+import ItemInfoEditor from "./components/ItemInfoEditor.vue";
 
 export default {
   name: "App",
 
   components: {
     BeerCard,
+    ItemInfoEditor,
   },
 
   data() {
@@ -45,15 +48,17 @@ export default {
   },
 
   methods: {
-    ...mapActions(["load_next", "delete_item"]),
+    ...mapActions(["load_next", "delete_item", "toggle_editor"]),
   },
 };
 </script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
 * {
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 #app {

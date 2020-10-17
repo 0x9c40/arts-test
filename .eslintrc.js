@@ -18,5 +18,6 @@ module.exports = {
   rules: {
     "node/no-unpublished-require": 0,
     "node/no-unsupported-features/es-syntax": 0,
+    "vue/prop-name-casing": 0,
   },
 };

@@ -70,14 +70,12 @@ export default new Vuex.Store({
       commit("toggle_loading");
 
       const response = await fetch(getters.current_page_URL);
-
-      commit("increment_page_number");
-
       const new_beers = await response.json();
+      commit("push_new_beers", new_beers);
 
       if (new_beers.length === 0) commit("mark_api_as_drained");
 
-      commit("push_new_beers", new_beers);
+      commit("increment_page_number");
 
       commit("toggle_loading");
 

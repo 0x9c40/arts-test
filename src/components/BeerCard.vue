@@ -94,6 +94,19 @@ export default {
   &__interface {
     flex: 1;
   }
+
+  @media (max-width: 700px) {
+    width: 300px;
+    flex-direction: column;
+
+    &__id {
+      left: unset;
+    }
+
+    &__preview {
+      margin-bottom: 32px;
+    }
+  }
 }
 
 .beer-preview {

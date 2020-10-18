@@ -43,6 +43,24 @@ export default {
 </script>
 
 <style lang="scss">
+.edit-modal {
+  display: none;
+
+  &--opened {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .edit-form {
   background-color: #fff;
   border-radius: 4px;
@@ -66,22 +84,9 @@ export default {
       cursor: pointer;
     }
   }
-}
-.edit-modal {
-  display: none;
 
-  &--opened {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  @media (max-width: 640px) {
+    width: 300px;
   }
 }
 </style>

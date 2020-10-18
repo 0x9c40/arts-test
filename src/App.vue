@@ -18,8 +18,8 @@
 import { mapActions, mapState } from "vuex";
 
 import BeerCard from "./components/BeerCard.vue";
-import LoadNextButton from "./components/LoadNextButton.vue";
 import ItemInfoEditor from "./components/ItemInfoEditor.vue";
+import LoadNextButton from "./components/LoadNextButton.vue";
 
 export default {
   name: "App",
@@ -55,7 +55,10 @@ export default {
 }
 
 #app {
-  width: 800px;
-  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 </style>

@@ -7,6 +7,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+
 export default {
   name: "LoadNextButton",
 
@@ -28,9 +29,8 @@ export default {
   margin-bottom: 16px;
   background-color: #b48986;
   color: white;
-  min-width: 64px;
+  width: 160px;
   height: 32px;
-  max-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,5 +1,5 @@
 <template>
-  <button class="load-next" @click="load_next" v-if="!drained">
+  <button v-if="!drained" class="load-next" @click="load_next">
     <div v-if="loading">Loading...</div>
     <div v-else>Show next</div>
   </button>

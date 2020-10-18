@@ -1,8 +1,8 @@
 <template>
-  <button v-if="!drained" class="load-next" @click="load_next">
+  <div v-if="!is_hidden" class="load-next-button" @click="load_next">
     <div v-if="loading">Loading...</div>
     <div v-else>Show next</div>
-  </button>
+  </div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
   computed: {
     ...mapState({
       loading: ({ loading }) => loading,
-      drained: ({ is_api_drained }) => is_api_drained,
+      is_hidden: (state) => state.is_api_drained || !state.initialized,
     }),
   },
 
@@ -23,5 +23,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.load-next-button {
+  margin-bottom: 16px;
+  background-color: #b48986;
+  color: white;
+  min-width: 64px;
+  height: 32px;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
 </style>

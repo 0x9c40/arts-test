@@ -12,6 +12,7 @@ export default new Vuex.Store({
     editable_item_id: undefined,
     is_api_drained: false,
     loading: false,
+    initialized: false,
   },
 
   getters: {
@@ -58,10 +59,14 @@ export default new Vuex.Store({
     toggle_loading(state) {
       state.loading = !state.loading;
     },
+
+    set_initialized(state) {
+      state.initialized = true;
+    },
   },
 
   actions: {
-    async load_next({ commit, state, getters }) {
+    async load_next({ commit, state: { initialized }, getters }) {
       commit("toggle_loading");
 
       const response = await fetch(getters.current_page_URL);
@@ -75,6 +80,8 @@ export default new Vuex.Store({
       commit("push_new_beers", new_beers);
 
       commit("toggle_loading");
+
+      if (!initialized) commit("set_initialized");
     },
 
     delete_item({ commit }, id) {

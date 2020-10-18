@@ -23,8 +23,9 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "FormTextarea",
+  name: "FormInput",
 
   props: {
     label: {
@@ -45,8 +46,14 @@ export default {
     },
   },
 
-  data() {
-    return {};
+  watch: {
+    value(new_value) {
+      this.modify_item_value({ prop_name: this.name, prop_value: new_value });
+    },
+  },
+
+  methods: {
+    ...mapActions(["modify_item_value"]),
   },
 };
 </script>

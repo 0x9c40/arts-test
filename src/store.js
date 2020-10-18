@@ -10,6 +10,7 @@ export default new Vuex.Store({
     page_number: 1,
     is_editor_opened: false,
     editable_item_id: undefined,
+    is_api_drained: false,
   },
 
   getters: {
@@ -17,10 +18,7 @@ export default new Vuex.Store({
       return `https://api.punkapi.com/v2/beers?page=${page_number}&limit=25`;
     },
     editable_item({ beers_list, editable_item_id }) {
-      if (editable_item_id === undefined) return;
-      const item = beers_list.find((item) => item.id === editable_item_id);
-      const { name, description } = item;
-      return { name, description };
+      return beers_list.find((item) => item.id === editable_item_id);
     },
   },
 
@@ -45,16 +43,15 @@ export default new Vuex.Store({
       state.editable_item_id = id;
     },
 
-    unset_editable_item_id(state) {
-      state.editable_item_id = undefined;
+    apply_patch({ beers_list, editable_item_id }, { prop_name, prop_value }) {
+      const editable_item = beers_list.find(
+        (item) => item.id === editable_item_id
+      );
+      editable_item[prop_name] = prop_value;
     },
 
-    apply_patch(state, { new_name, new_description }) {
-      const item = state.beers_list.find(
-        (item) => item.id === state.editable_item_id
-      );
-      item.name = new_name;
-      item.description = new_description;
+    mark_api_as_drained({ is_api_drained }) {
+      is_api_drained = true;
     },
   },
 
@@ -66,6 +63,10 @@ export default new Vuex.Store({
 
       const new_beers = await response.json();
 
+      console.log(new_beers.length);
+
+      if (new_beers.length === 0) commit("mark_api_as_drained");
+
       commit("push_new_beers", new_beers);
     },
 
@@ -73,7 +74,7 @@ export default new Vuex.Store({
       commit("delete_item", id);
     },
 
-    edit_item({ dispatch, commit, getters }, id) {
+    edit_item({ dispatch, commit }, id) {
       commit("set_editable_item_id", id);
       dispatch("toggle_editor");
     },
@@ -82,10 +83,8 @@ export default new Vuex.Store({
       commit("toggle_editor");
     },
 
-    save_changes({ dispatch, commit }, patch) {
+    modify_item_value({ commit }, patch) {
       commit("apply_patch", patch);
-      commit("unset_editable_item_id");
-      dispatch("toggle_editor");
     },
   },
 });

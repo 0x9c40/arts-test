@@ -6,25 +6,13 @@
     @click="toggle_editor"
   >
     <form class="edit-form" @click.stop>
+      <FormInput v-model="editable_item.name" label="Name" name="name" />
       <FormInput
-        label="Name"
-        name="name"
-        :value="editable_item.name"
-        @input="set_new_name"
-      />
-      <FormInput
+        v-model="editable_item.description"
         label="Description"
         name="description"
-        :value="editable_item.description"
         textarea
-        @input="set_new_description"
       />
-      <div
-        class="edit-form__save"
-        @click="save_changes({ new_name, new_description })"
-      >
-        Save
-      </div>
     </form>
   </div>
 </template>
@@ -41,37 +29,15 @@ export default {
     FormInput,
   },
 
-  data() {
-    return {
-      new_name: "",
-      new_description: "",
-    };
-  },
-
   computed: {
     ...mapState({
       is_editor_opened: ({ is_editor_opened }) => is_editor_opened,
-      editable_item_id: ({ editable_item_id }) => editable_item_id,
     }),
     ...mapGetters(["editable_item"]),
   },
 
-  updated() {
-    if (!this.editable_item_id) return;
-    this.new_name = this.editable_item.name;
-    this.new_description = this.editable_item.description;
-  },
-
   methods: {
-    ...mapActions(["toggle_editor", "save_changes"]),
-
-    set_new_name(val) {
-      this.new_name = val;
-    },
-
-    set_new_description(val) {
-      this.new_description = val;
-    },
+    ...mapActions(["toggle_editor"]),
   },
 };
 </script>

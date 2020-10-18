@@ -48,14 +48,14 @@ export default {
   },
 
   methods: {
-    ...mapActions(["load_next", "delete_item", "toggle_editor"]),
+    ...mapActions(["load_next"]),
   },
 };
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@100;300&display=swap");
+
 * {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;

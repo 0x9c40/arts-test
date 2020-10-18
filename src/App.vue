@@ -9,10 +9,7 @@
       :description="beer.description"
       :brewers_tips="beer.brewers_tips"
     />
-    <button @click="load_next">
-      <div v-if="loading">Loading...</div>
-      <div v-else>Show next</div>
-    </button>
+    <LoadNextButton />
     <ItemInfoEditor />
   </div>
 </template>
@@ -21,6 +18,7 @@
 import { mapActions, mapState } from "vuex";
 
 import BeerCard from "./components/BeerCard.vue";
+import LoadNextButton from "./components/LoadNextButton.vue";
 import ItemInfoEditor from "./components/ItemInfoEditor.vue";
 
 export default {
@@ -29,12 +27,7 @@ export default {
   components: {
     BeerCard,
     ItemInfoEditor,
-  },
-
-  data() {
-    return {
-      loading: false,
-    };
+    LoadNextButton,
   },
 
   computed: {

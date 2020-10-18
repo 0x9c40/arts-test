@@ -11,6 +11,7 @@ export default new Vuex.Store({
     is_editor_opened: false,
     editable_item_id: undefined,
     is_api_drained: false,
+    loading: false,
   },
 
   getters: {
@@ -50,24 +51,30 @@ export default new Vuex.Store({
       editable_item[prop_name] = prop_value;
     },
 
-    mark_api_as_drained({ is_api_drained }) {
-      is_api_drained = true;
+    mark_api_as_drained(state) {
+      state.is_api_drained = true;
+    },
+
+    toggle_loading(state) {
+      state.loading = !state.loading;
     },
   },
 
   actions: {
-    async load_next({ commit, getters }) {
+    async load_next({ commit, state, getters }) {
+      commit("toggle_loading");
+
       const response = await fetch(getters.current_page_URL);
 
       commit("increment_page_number");
 
       const new_beers = await response.json();
 
-      console.log(new_beers.length);
-
       if (new_beers.length === 0) commit("mark_api_as_drained");
 
       commit("push_new_beers", new_beers);
+
+      commit("toggle_loading");
     },
 
     delete_item({ commit }, id) {
